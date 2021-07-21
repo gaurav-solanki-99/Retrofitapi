@@ -1,11 +1,14 @@
 package com.example.retrofitapi;
 
+import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public class UserApi
 {
@@ -35,6 +38,15 @@ public class UserApi
     public Call<User> userSave(@Field("name")String name,
                                @Field("age")int age,
                                @Field("salary")int salary);
+
+
+    @DELETE("/api/v1/delete/{id}")
+    Call<User> deleteData(
+            @Path("id") int id
+
+    );
+
+    // @DELETE("/users/{x}/data/{y}/{id}")
 
 
 

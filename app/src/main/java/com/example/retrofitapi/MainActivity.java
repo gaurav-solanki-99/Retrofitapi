@@ -55,5 +55,35 @@ public class MainActivity extends AppCompatActivity {
                });
             }
         });
+
+
+        binding.deletebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = Integer.parseInt(binding.etId.getText().toString());
+
+                UserApiInterface userApiInterface = UserApi.getUserApiInstance();
+                Call<User> call =userApiInterface.deleteData(id);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        System.out.println(">>>>>>>>>>>Response Code >>>"+response.code());
+                        Log.e(" Code >>>",""+response.code());
+
+                        if(response.code()==200)
+                        {
+                            Toast.makeText(MainActivity.this, "Success Fully delete", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, "Error "+t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+        });
     }
 }
